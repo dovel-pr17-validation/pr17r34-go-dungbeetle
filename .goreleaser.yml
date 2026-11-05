@@ -1,0 +1,28 @@
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    binary: dungbeetle
+    goos:
+      - windows
+      - darwin
+      - linux
+      - freebsd
+      - openbsd
+      - netbsd
+    goarch:
+      - amd64
+    dir: ./cmd/
+
+archives:
+  - formats: [tar.gz]
+    files:
+      - src: cmd/config.sample.toml
+        dst: config.toml.sample
+      - README.md
+      - LICENSE
